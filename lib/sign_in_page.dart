@@ -1,25 +1,26 @@
+import 'dart:ui';
+
+import 'package:e_book/home_page.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
+        children: [
+          const Text(
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.brown,
                   fontSize: 30,
-                  fontFamily: 'Pacifico-Regular'),
+                  fontFamily: 'GloriaHallelujah-Regular'),
               'Sign In'),
-          Padding(padding: EdgeInsets.all(10)),
-          TextField(
+          const Padding(padding: EdgeInsets.all(10)),
+          const TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(
@@ -30,7 +31,7 @@ class SignInPage extends StatelessWidget {
               labelStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
-                  fontFamily: 'Pacifico-Regular'),
+                  fontFamily: 'GloriaHallelujah-Regular'),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -42,8 +43,8 @@ class SignInPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-          TextField(
+          const Padding(padding: EdgeInsets.only(top: 15)),
+          const TextField(
             obscureText: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(
@@ -64,9 +65,17 @@ class SignInPage extends StatelessWidget {
               labelStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
-                  fontFamily: 'Pacifico-Regular'),
+                  fontFamily: 'GloriaHallelujah-Regular'),
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(HomePage.routeName);
+            },
+            child: const Text('I am next page'),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, foregroundColor: Colors.black),
+          )
         ],
       ),
     );

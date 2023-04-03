@@ -1,3 +1,4 @@
+import 'package:e_book/home_page.dart';
 import 'package:e_book/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,18 +19,8 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: Colors.white),
         ),
       ),
-      home: const BookHomePage(title: 'Flutter Demo Home Page'),
+      home: SignInPage(),
+      routes: {HomePage.routeName: (_) => HomePage()},
     );
-  }
-}
-
-class BookHomePage extends StatelessWidget {
-  const BookHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return SignInPage();
   }
 }
