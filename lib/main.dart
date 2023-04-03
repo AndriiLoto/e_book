@@ -1,3 +1,4 @@
+import 'package:e_book/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,57 +30,6 @@ class BookHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-                style: TextStyle(color: Colors.white, fontSize: 30), 'Sign In'),
-            Padding(padding: EdgeInsets.all(10)),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(150),
-                  ),
-                ),
-                labelText: 'E-mail',
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                labelStyle: TextStyle(color: Colors.white, fontSize: 20),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(150),
-                  ),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 15)),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(150),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(150),
-                  ),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ),
-          ],
-        ));
+    return SignInPage();
   }
 }
