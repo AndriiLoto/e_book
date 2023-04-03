@@ -35,7 +35,7 @@ class BookHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-                style: TextStyle(color: Colors.white, fontSize: 35), 'Sign In'),
+                style: TextStyle(color: Colors.white, fontSize: 30), 'Sign In'),
             Padding(padding: EdgeInsets.all(10)),
             TextField(
               decoration: InputDecoration(
@@ -48,7 +48,7 @@ class BookHomePage extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white, fontSize: 20),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(150),
@@ -76,7 +76,7 @@ class BookHomePage extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.white),
                 ),
                 labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ],
