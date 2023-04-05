@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:e_book/home_page.dart';
+import 'package:e_book/widgets/home_page.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -68,13 +68,23 @@ class SignInPage extends StatelessWidget {
                   fontFamily: 'GloriaHallelujah-Regular'),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(HomePage.routeName);
-            },
-            child: const Text('I am next page'),
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, foregroundColor: Colors.black),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(HomePage.routeName);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black),
+                  child: const Text('I am next page'),
+                ),
+              ),
+            ],
           )
         ],
       ),

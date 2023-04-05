@@ -1,5 +1,5 @@
-import 'package:e_book/home_page.dart';
-import 'package:e_book/sign_in_page.dart';
+import 'package:e_book/widgets/home_page.dart';
+import 'package:e_book/widgets/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
