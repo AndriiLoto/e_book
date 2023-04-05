@@ -13,8 +13,9 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.grey[900],
           centerTitle: true,
           title: const Text(
-            'Welcome to Ebook',
-            style: TextStyle(fontFamily: 'GloriaHallelujah-Regular'),
+            'Welcome to EbooK',
+            style:
+                TextStyle(fontFamily: 'GloriaHallelujah-Regular', fontSize: 34),
           ),
         ),
         body: SingleChildScrollView(
