@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CategoryButtons extends StatelessWidget {
   String? categoryName;
@@ -17,7 +15,8 @@ class CategoryButtons extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Text(
             '$categoryName',
-            style: TextStyle(color: Colors.white, fontSize: 15.5),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 14, fontFamily: 'e-Ukraine'),
           ),
         ),
       ),

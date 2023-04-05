@@ -1,8 +1,7 @@
 import 'dart:ui';
 
 import 'package:e_book/widgets/home_page.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
@@ -13,11 +12,11 @@ class SignInPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
               style: TextStyle(
-                  color: Colors.brown,
+                  color: Colors.grey[700],
                   fontSize: 30,
-                  fontFamily: 'GloriaHallelujah-Regular'),
+                  fontFamily: 'e-Ukraine'),
               'Sign In'),
           const Padding(padding: EdgeInsets.all(10)),
           const TextField(
@@ -29,9 +28,7 @@ class SignInPage extends StatelessWidget {
               ),
               labelText: 'E-mail',
               labelStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'GloriaHallelujah-Regular'),
+                  color: Colors.white, fontSize: 20, fontFamily: 'e-Ukraine'),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -63,9 +60,7 @@ class SignInPage extends StatelessWidget {
               ),
               labelText: 'Password',
               labelStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'GloriaHallelujah-Regular'),
+                  color: Colors.white, fontSize: 20, fontFamily: 'e-Ukraine'),
             ),
           ),
           const SizedBox(

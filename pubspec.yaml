@@ -80,11 +80,11 @@ flutter:
       fonts:
         - asset: assets\fonts\GloriaHallelujah-Regular.ttf
        
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    - family: e-Ukraine
+      fonts:
+        - asset: assets\fonts\e-Ukraine-Regular.otf
+        - asset: assets\fonts\e-Ukraine-Bold.otf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

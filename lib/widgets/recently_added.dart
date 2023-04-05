@@ -41,10 +41,10 @@ class RecentlyAdded extends StatelessWidget {
                     child: Text(
                       'The Title of Book',
                       style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'e-Ukraine'),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -57,10 +57,10 @@ class RecentlyAdded extends StatelessWidget {
                     child: Text(
                       'Author Name',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.grey,
-                      ),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.grey,
+                          fontFamily: 'e-Ukraine'),
                     ),
                   ),
                   SizedBox(
@@ -71,6 +71,7 @@ class RecentlyAdded extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13.0,
                       color: Colors.grey,
+                      fontFamily: 'e-Ukraine',
                     ),
                   ),
                 ],

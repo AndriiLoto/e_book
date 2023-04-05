@@ -14,8 +14,7 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
           title: const Text(
             'Welcome to EbooK',
-            style:
-                TextStyle(fontFamily: 'GloriaHallelujah-Regular', fontSize: 34),
+            style: TextStyle(fontFamily: 'e-Ukraine', fontSize: 30),
           ),
         ),
         body: SingleChildScrollView(
@@ -52,9 +51,8 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(left: 11.0),
                 child: Text(
                   'Categories',
-                  style: TextStyle(
-                      fontFamily: 'GloriaHallelujah-Regular',
-                      color: Colors.white),
+                  style:
+                      TextStyle(fontFamily: 'e-Ukraine', color: Colors.white),
                 ),
               ),
               SingleChildScrollView(
@@ -113,9 +111,8 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(left: 11.0),
                 child: Text(
                   'Recently Added',
-                  style: TextStyle(
-                      fontFamily: 'GloriaHallelujah-Regular',
-                      color: Colors.white),
+                  style:
+                      TextStyle(fontFamily: 'e-Ukraine', color: Colors.white),
                 ),
               ),
               SizedBox(
@@ -130,7 +127,8 @@ class HomePage extends StatelessWidget {
                     children: [
                       RecentlyAdded(),
                       RecentlyAdded(),
-                      RecentlyAdded()
+                      RecentlyAdded(),
+                      RecentlyAdded(),
                     ],
                   ),
                 ),
