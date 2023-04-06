@@ -19,8 +19,11 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: Colors.white),
         ),
       ),
-      home: SignInPage(),
-      routes: {HomePage.routeName: (_) => HomePage()},
+      routes: {
+        LogInPage.routeName: (context) => LogInPage(),
+        HomePage.routeName: (_) => HomePage()
+      },
+      initialRoute: LogInPage.routeName,
     );
   }
 }
