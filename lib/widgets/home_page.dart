@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.all(18.5),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: const [

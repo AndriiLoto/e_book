@@ -12,11 +12,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedPageIndex = 0;
-  static List _widgetOptions = [
-    HomePage(),
-    ExplorePageWidget(),
-    const Text('Settings'),
-  ];
+
   void onSelectTab(int index) {
     if (_selectedPageIndex == index) {
       return;
@@ -29,7 +25,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions[_selectedPageIndex],
+      body: IndexedStack(index: _selectedPageIndex, children: [
+        HomePage(),
+        ExplorePageWidget(),
+        const Text('Settings'),
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
