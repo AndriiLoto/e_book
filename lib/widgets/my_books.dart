@@ -7,8 +7,8 @@ class MyBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      borderRadius: BorderRadius.circular(9.0),
-      child: Container(
+      borderRadius: BorderRadius.circular(10.0),
+      child: SizedBox(
         height: 200,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),

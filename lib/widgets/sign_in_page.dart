@@ -1,4 +1,5 @@
 import 'package:e_book/widgets/home_page.dart';
+import 'package:e_book/widgets/main_page_widget.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,8 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPagePageState extends State<LogInPage> {
-  final _eMailTextConroller = TextEditingController();
-
-  final _passwordTextConroller = TextEditingController();
+  final _eMailTextConroller = TextEditingController(text: 'admin');
+  final _passwordTextConroller = TextEditingController(text: 'admin');
 
   String? errorText = null;
 
@@ -21,7 +21,7 @@ class _LogInPagePageState extends State<LogInPage> {
     if (eMail == 'admin' && password == 'admin') {
       errorText = null;
 
-      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+      Navigator.of(context).pushReplacementNamed(MainPage.routeName);
     } else {
       errorText = 'Incorrect E-mail or password';
     }

@@ -1,4 +1,5 @@
 import 'package:e_book/widgets/home_page.dart';
+import 'package:e_book/widgets/main_page_widget.dart';
 import 'package:e_book/widgets/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +19,14 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           subtitle1: TextStyle(color: Colors.white),
         ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.grey[900],
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey[700]),
       ),
       routes: {
         LogInPage.routeName: (context) => LogInPage(),
-        HomePage.routeName: (_) => HomePage()
+        MainPage.routeName: (_) => MainPage()
       },
       initialRoute: LogInPage.routeName,
     );
