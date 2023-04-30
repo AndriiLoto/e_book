@@ -1,3 +1,4 @@
+import 'package:e_book/widgets/book_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyBooks extends StatelessWidget {
@@ -6,7 +7,8 @@ class MyBooks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: (() =>
+          Navigator.of(context).pushNamed(BookScreenWidget.routeName)),
       borderRadius: BorderRadius.circular(10.0),
       child: SizedBox(
         height: 200,

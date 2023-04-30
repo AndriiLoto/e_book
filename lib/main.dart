@@ -1,3 +1,4 @@
+import 'package:e_book/widgets/book_screen.dart';
 import 'package:e_book/widgets/home_page.dart';
 import 'package:e_book/widgets/main_page_widget.dart';
 import 'package:e_book/widgets/sign_in_page.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         LogInPage.routeName: (context) => LogInPage(),
-        MainPage.routeName: (_) => MainPage()
+        MainPage.routeName: (_) => const MainPage(),
+        BookScreenWidget.routeName: (_) => const BookScreenWidget(),
       },
       initialRoute: LogInPage.routeName,
     );

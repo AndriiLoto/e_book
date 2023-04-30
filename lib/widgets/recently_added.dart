@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:e_book/models/book.dart';
 
 class RecentlyAdded extends StatelessWidget {
   @override
@@ -6,6 +7,8 @@ class RecentlyAdded extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        splashColor: Colors.black,
         onTap: () {},
         child: SizedBox(
           height: 150.0,
@@ -25,7 +28,7 @@ class RecentlyAdded extends StatelessWidget {
                     Radius.circular(10.0),
                   ),
                   child: Image.asset(
-                    'assets/images/BookCover.jpg',
+                    Book().imageName,
                   ),
                 ),
               ),

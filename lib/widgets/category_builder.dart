@@ -1,9 +1,5 @@
+import 'package:e_book/models/book.dart';
 import 'package:flutter/material.dart';
-
-class Book {
-  final String imageName;
-  Book(this.imageName);
-}
 
 class CategoryBuilder extends StatelessWidget {
   final String? categoryName;
@@ -50,7 +46,7 @@ class CategoryBuilder extends StatelessWidget {
                     height: 200,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
-                        child: Image.asset('assets/images/BookCover.jpg')),
+                        child: Image.asset(Book().imageName)),
                   ),
                 ),
               );

@@ -1,5 +1,6 @@
 import 'package:e_book/widgets/explore_screen_widget.dart';
 import 'package:e_book/widgets/home_page.dart';
+import 'package:e_book/widgets/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
       body: IndexedStack(index: _selectedPageIndex, children: [
         HomePage(),
         ExplorePageWidget(),
-        const Text('Settings'),
+        SettingsScreen(),
       ]),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
