@@ -1,6 +1,6 @@
-import 'package:e_book/widgets/explore_screen_widget.dart';
-import 'package:e_book/widgets/home_page.dart';
-import 'package:e_book/widgets/settings_screen.dart';
+import 'package:e_book/screens/explore_screen_widget.dart';
+import 'package:e_book/screens/home_page.dart';
+import 'package:e_book/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {

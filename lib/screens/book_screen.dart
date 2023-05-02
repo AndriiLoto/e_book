@@ -1,11 +1,12 @@
 import 'package:e_book/models/book.dart';
 import 'package:e_book/widgets/category_buttons.dart';
 import 'package:e_book/widgets/recently_added.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class BookScreenWidget extends StatefulWidget {
   static const routeName = 'BookPage';
-  const BookScreenWidget({super.key});
+  BookScreenWidget({super.key});
 
   @override
   State<BookScreenWidget> createState() => _BookScreenWidgetState();

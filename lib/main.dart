@@ -1,7 +1,9 @@
-import 'package:e_book/widgets/book_screen.dart';
-import 'package:e_book/widgets/home_page.dart';
+import 'package:e_book/screens/book_screen.dart';
+import 'package:e_book/screens/sign_in_page.dart';
+import 'package:e_book/screens/sign_up_page.dart';
+
 import 'package:e_book/widgets/main_page_widget.dart';
-import 'package:e_book/widgets/sign_in_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,7 +30,8 @@ class MyApp extends StatelessWidget {
       routes: {
         LogInPage.routeName: (context) => LogInPage(),
         MainPage.routeName: (_) => const MainPage(),
-        BookScreenWidget.routeName: (_) => const BookScreenWidget(),
+        BookScreenWidget.routeName: (_) => BookScreenWidget(),
+        SignUpPage.routeName: (context) => SignUpPage(),
       },
       initialRoute: LogInPage.routeName,
     );

@@ -22,6 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         'title': 'Downloads',
         'function': () {},
       },
+      {'icon': Icons.person, 'title': 'Profile', 'function': () {}},
       {
         'icon': Icons.info_outline,
         'title': 'About',
@@ -60,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               thickness: 1,
             );
           }),
-          itemCount: 3),
+          itemCount: 4),
     );
   }
 }

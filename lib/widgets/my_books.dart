@@ -1,4 +1,4 @@
-import 'package:e_book/widgets/book_screen.dart';
+import 'package:e_book/screens/book_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyBooks extends StatelessWidget {
