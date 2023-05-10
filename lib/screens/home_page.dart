@@ -1,6 +1,7 @@
 import 'package:e_book/widgets/category_buttons.dart';
 import 'package:e_book/widgets/my_books.dart';
 import 'package:e_book/widgets/recently_added.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,10 +18,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
         centerTitle: true,
-        title: const Text(
-          'Welcome to EbooK',
-          style: TextStyle(fontFamily: 'e-Ukraine', fontSize: 30),
-        ),
+        title: (user == null)
+            ? const Text(
+                'Welcome to EbooK',
+                style: TextStyle(fontFamily: 'e-Ukraine', fontSize: 30),
+              )
+            : const Text(
+                'Welcome Back',
+                style: TextStyle(fontFamily: 'e-Ukraine', fontSize: 30),
+              ),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -27,30 +34,46 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              width: double.infinity,
               margin: const EdgeInsets.all(18.5),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    MyBooks(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    MyBooks(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    MyBooks(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    MyBooks(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
+                child: (user == null)
+                    ? Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Sign in and see your favorites books',
+                            style: TextStyle(
+                                fontFamily: 'e-Ukraine',
+                                color: Colors.white,
+                                fontSize: 19),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: const [
+                          MyBooks(),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          MyBooks(),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          MyBooks(),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          MyBooks(),
+                          SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
               ),
             ),
             const Padding(

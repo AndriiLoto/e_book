@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1009312837136",
-    "project_id": "ebook-c9866",
-    "storage_bucket": "ebook-c9866.appspot.com"
+    "project_number": "800223160362",
+    "project_id": "booke-6db00",
+    "storage_bucket": "booke-6db00.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1009312837136:android:afcb0a76e818235e3b2495",
+        "mobilesdk_app_id": "1:800223160362:android:8f0ec2c9819c132825bb53",
         "android_client_info": {
           "package_name": "com.example.e_book"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1009312837136-bvsjpfcaak3bga5vs4voc3118r17ld2b.apps.googleusercontent.com",
+          "client_id": "800223160362-u04erbrpmfoqmqvmghejq49d3kbbevvl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQ-_PeKVO81cZlsRmXVq1iTXSIhQ0YhiU"
+          "current_key": "AIzaSyDiO_TSfvc4slIw73tGWWFrh87MXg2U4vs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1009312837136-bvsjpfcaak3bga5vs4voc3118r17ld2b.apps.googleusercontent.com",
+              "client_id": "800223160362-u04erbrpmfoqmqvmghejq49d3kbbevvl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

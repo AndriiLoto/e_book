@@ -1,3 +1,7 @@
+import 'package:e_book/screens/profileScreen.dart';
+import 'package:e_book/screens/sign_in_page.dart';
+import 'package:e_book/screens/sign_up_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -8,6 +12,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final user = FirebaseAuth.instance.currentUser;
+  void checkUser() {
+    if (user == null) {
+      Navigator.of(context).pushReplacementNamed(LogInPage.routeName);
+    } else {
+      Navigator.of(context).pushNamed(ProfileScreen.routName);
+    }
+  }
+
   List items = [];
   @override
   void initState() {
@@ -22,7 +35,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         'title': 'Downloads',
         'function': () {},
       },
-      {'icon': Icons.person, 'title': 'Profile', 'function': () {}},
+      {
+        'icon': Icons.person,
+        'title': 'Profile',
+        'function': checkUser,
+      },
       {
         'icon': Icons.info_outline,
         'title': 'About',

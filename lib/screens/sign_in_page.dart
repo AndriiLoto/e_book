@@ -1,8 +1,11 @@
 import 'package:e_book/screens/home_page.dart';
 import 'package:e_book/screens/sign_up_page.dart';
 import 'package:e_book/widgets/main_page_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+
+import '../services/snack_bar_service.dart';
 
 class LogInPage extends StatefulWidget {
   static const routeName = 'LogInPage';
@@ -11,22 +14,59 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPagePageState extends State<LogInPage> {
-  final _eMailTextConroller = TextEditingController(text: 'admin');
-  final _passwordTextConroller = TextEditingController(text: 'admin');
+  bool isHiddenPassword = true;
+  final _eMailTextConroller = TextEditingController();
+  final _passwordTextConroller = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   String? errorText = null;
 
-  void _logIn() {
-    final eMail = _eMailTextConroller.text;
-    final password = _passwordTextConroller.text;
-    if (eMail == 'admin' && password == 'admin') {
-      errorText = null;
+  @override
+  void dispose() {
+    _eMailTextConroller.dispose();
+    _passwordTextConroller.dispose();
 
-      Navigator.of(context).pushReplacementNamed(MainPage.routeName);
-    } else {
-      errorText = 'Incorrect E-mail or password';
-    }
+    super.dispose();
+  }
+
+  void togglePasswordView() {
     setState(() {});
+    isHiddenPassword = !isHiddenPassword;
+  }
+
+  Future<void> _logIn() async {
+    final navigator = Navigator.of(context);
+
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _eMailTextConroller.text.trim(),
+        password: _passwordTextConroller.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        SnackBarService.showSnackBar(
+          context,
+          'Неправильный email или пароль. Повторите попытку',
+          true,
+        );
+        return;
+      } else {
+        SnackBarService.showSnackBar(
+          context,
+          'Неизвестная ошибка! Попробуйте еще раз или обратитесь в поддержку.',
+          true,
+        );
+        return;
+      }
+    }
+
+    navigator.pushNamedAndRemoveUntil(
+        MainPage.routeName, (Route<dynamic> route) => false);
   }
 
   void _signUp() {
@@ -38,6 +78,7 @@ class _LogInPagePageState extends State<LogInPage> {
     final errorText = this.errorText;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Column(
         children: [
@@ -65,57 +106,81 @@ class _LogInPagePageState extends State<LogInPage> {
                   ],
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: TextField(
-                      controller: _eMailTextConroller,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(150),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            autocorrect: false,
+                            controller: _eMailTextConroller,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(150),
+                                ),
+                              ),
+                              labelText: 'E-mail',
+                              labelStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'e-Ukraine'),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(150),
+                                ),
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
-                        labelText: 'E-mail',
-                        labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'e-Ukraine'),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(150),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 15),
                           ),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(padding: EdgeInsets.only(top: 15)),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: TextField(
-                      controller: _passwordTextConroller,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(150),
+                          TextFormField(
+                            validator: (value) =>
+                                value != null && value.length < 5
+                                    ? 'Password must contain 5 characters'
+                                    : null,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            autocorrect: false,
+                            controller: _passwordTextConroller,
+                            obscureText: isHiddenPassword,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(150),
+                                ),
+                              ),
+                              suffix: InkWell(
+                                onTap: togglePasswordView,
+                                child: Icon(
+                                  isHiddenPassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(150),
+                                ),
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              labelText: 'Password',
+                              labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'e-Ukraine'),
+                            ),
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(150),
-                          ),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        labelText: 'Password',
-                        labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'e-Ukraine'),
+                        ],
                       ),
                     ),
                   ),
