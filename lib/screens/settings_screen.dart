@@ -15,7 +15,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final user = FirebaseAuth.instance.currentUser;
   void checkUser() {
     if (user == null) {
-      Navigator.of(context).pushReplacementNamed(LogInPage.routeName);
+      Navigator.of(context).pushNamed(LogInPage.routeName);
     } else {
       Navigator.of(context).pushNamed(ProfileScreen.routName);
     }

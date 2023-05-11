@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  Future<void> signUp() async {
+  Future<void> _signUp() async {
     final navigator = Navigator.of(context);
 
     final isValid = formKey.currentState!.validate();
@@ -76,7 +76,10 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
     }
-    navigator.pushReplacementNamed(FirebaseStream.routeName);
+    navigator.pushNamedAndRemoveUntil(
+      FirebaseStream.routeName,
+      (route) => false,
+    );
   }
 
   @override
@@ -241,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: ElevatedButton(
-                            onPressed: signUp,
+                            onPressed: _signUp,
                             style: ElevatedButton.styleFrom(
                                 shadowColor: Colors.grey[700],
                                 elevation: 7.5,

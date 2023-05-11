@@ -1,5 +1,6 @@
 import 'package:e_book/screens/book_screen.dart';
 import 'package:e_book/screens/profileScreen.dart';
+import 'package:e_book/screens/reset_passwords_screen.dart';
 import 'package:e_book/screens/sign_in_page.dart';
 import 'package:e_book/screens/sign_up_page.dart';
 import 'package:e_book/services/firebase_stream.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         BookScreenWidget.routeName: (_) => BookScreenWidget(),
         SignUpPage.routeName: (context) => SignUpPage(),
         ProfileScreen.routName: (context) => ProfileScreen(),
+        ResetPasswordScreen.routeName: (context) => ResetPasswordScreen()
       },
       initialRoute: FirebaseStream.routeName,
     );

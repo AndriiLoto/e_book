@@ -1,4 +1,5 @@
 import 'package:e_book/screens/home_page.dart';
+import 'package:e_book/screens/reset_passwords_screen.dart';
 import 'package:e_book/screens/sign_up_page.dart';
 import 'package:e_book/widgets/main_page_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,14 +52,14 @@ class _LogInPagePageState extends State<LogInPage> {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         SnackBarService.showSnackBar(
           context,
-          'Неправильный email или пароль. Повторите попытку',
+          'Wrong e-mail or password!Please try again!',
           true,
         );
         return;
       } else {
         SnackBarService.showSnackBar(
           context,
-          'Неизвестная ошибка! Попробуйте еще раз или обратитесь в поддержку.',
+          'Unknown error,please contact customer support',
           true,
         );
         return;
@@ -73,13 +74,30 @@ class _LogInPagePageState extends State<LogInPage> {
     Navigator.of(context).pushNamed(SignUpPage.routeName);
   }
 
+  void _resetPassword() {
+    Navigator.of(context).pushNamed(
+      ResetPasswordScreen.routeName,
+    );
+  }
+
+  @override
+  void initState() {
+    _eMailTextConroller.addListener(() {
+      setState(() {});
+    });
+    _passwordTextConroller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final errorText = this.errorText;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[900],
       body: Column(
         children: [
           Expanded(
@@ -126,12 +144,9 @@ class _LogInPagePageState extends State<LogInPage> {
                                   fontSize: 20,
                                   fontFamily: 'e-Ukraine'),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: Colors.grey),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(150),
-                                ),
                                 borderSide: BorderSide(color: Colors.white),
                               ),
                             ),
@@ -150,11 +165,7 @@ class _LogInPagePageState extends State<LogInPage> {
                             controller: _passwordTextConroller,
                             obscureText: isHiddenPassword,
                             decoration: InputDecoration(
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(150),
-                                ),
-                              ),
+                              border: const OutlineInputBorder(),
                               suffix: InkWell(
                                 onTap: togglePasswordView,
                                 child: Icon(
@@ -165,12 +176,9 @@ class _LogInPagePageState extends State<LogInPage> {
                                 ),
                               ),
                               enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: Colors.grey),
                               ),
                               focusedBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(150),
-                                ),
                                 borderSide: BorderSide(color: Colors.white),
                               ),
                               labelText: 'Password',
@@ -196,10 +204,10 @@ class _LogInPagePageState extends State<LogInPage> {
                         ), */
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: /* () {
-                              Navigator.of(context).pushNamed(HomePage.routeName);
-                            } */
-                                _logIn,
+                            onPressed: (_eMailTextConroller.text.isEmpty ||
+                                    _passwordTextConroller.text.isEmpty)
+                                ? null
+                                : _logIn,
                             style: ElevatedButton.styleFrom(
                                 shadowColor: Colors.grey[700],
                                 elevation: 7.5,
@@ -215,13 +223,24 @@ class _LogInPagePageState extends State<LogInPage> {
               ),
             ),
           ),
-          const Text(
-            'Don\'t have an account? Create one for free!',
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontFamily: 'e-Ukraine'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Text(
+                'Don\'t have an account?',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 15, fontFamily: 'e-Ukraine'),
+              ),
+              const Text(
+                'Forgot your password?',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 15, fontFamily: 'e-Ukraine'),
+              ),
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 10.0),
+            padding:
+                const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
             child: Row(
               children: [
                 Expanded(
@@ -235,7 +254,30 @@ class _LogInPagePageState extends State<LogInPage> {
                         elevation: 7.5,
                         backgroundColor: Colors.white60,
                         foregroundColor: Colors.black),
-                    child: const Text('Sign Up'),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(fontFamily: 'e-Ukraine'),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: /* () {
+                                    Navigator.of(context).pushNamed(HomePage.routeName);
+                                  } */
+                        _resetPassword,
+                    style: ElevatedButton.styleFrom(
+                        shadowColor: Colors.grey[700],
+                        elevation: 7.5,
+                        backgroundColor: Colors.white60,
+                        foregroundColor: Colors.black),
+                    child: const Text(
+                      'Resset Password',
+                      style: TextStyle(fontFamily: 'e-Ukraine'),
+                    ),
                   ),
                 ),
               ],

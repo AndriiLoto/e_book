@@ -67,7 +67,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         SnackBarService.showSnackBar(
           context,
           '$e',
-          //'Неизвестная ошибка! Попробуйте еще раз или обратитесь в поддержку.',
           true,
         );
       }
@@ -78,9 +77,15 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   Widget build(BuildContext context) => isEmailVerified
       ? const MainPage()
       : Scaffold(
+          backgroundColor: Colors.grey[900],
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: const Text('E-mail verification'),
+            backgroundColor: Colors.grey[900],
+            centerTitle: true,
+            title: const Text(
+              'E-mail Verification',
+              style: TextStyle(fontFamily: 'e-Ukraine', fontSize: 20),
+            ),
           ),
           body: SafeArea(
             child: Padding(
@@ -91,14 +96,22 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   const Text(
                     'The confirmation email has been sent to your email address.',
                     style: TextStyle(
-                      fontSize: 20,
-                    ),
+                        fontSize: 20,
+                        fontFamily: 'e-Ukraine',
+                        color: Colors.white),
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: canResendEmail ? sendVerificationEmail : null,
-                    icon: const Icon(Icons.email),
-                    label: const Text('Resend'),
+                    icon: const Icon(Icons.email, color: Colors.black),
+                    label: const Text(
+                      'Resend',
+                      style: TextStyle(
+                          color: Colors.black, fontFamily: 'e-Ukraine'),
+                    ),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   ),
                   const SizedBox(height: 20),
                   TextButton(
@@ -107,10 +120,8 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       await FirebaseAuth.instance.currentUser!.delete();
                     },
                     child: const Text(
-                      'Отменить',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
+                      'Cancel',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   )
                 ],
