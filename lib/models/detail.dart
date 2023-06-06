@@ -1,62 +1,11 @@
 import 'dart:convert';
 
-Books booksFromJson(String str) => Books.fromJson(json.decode(str));
-String booksToJson(Books data) => json.encode(data.toJson());
+DetailModel detailModelFromJson(String str) =>
+    DetailModel.fromJson(json.decode(str));
+String detailModelToJson(DetailModel data) => json.encode(data.toJson());
 
-class Books {
-  Books({
-    String? kind,
-    int? totalItems,
-    List<Items>? items,
-  }) {
-    _kind = kind;
-    _totalItems = totalItems;
-    _items = items;
-  }
-
-  Books.fromJson(dynamic json) {
-    _kind = json['kind'];
-    _totalItems = json['totalItems'];
-    if (json['items'] != null) {
-      _items = [];
-      json['items'].forEach((v) {
-        _items?.add(Items.fromJson(v));
-      });
-    }
-  }
-  String? _kind;
-  int? _totalItems;
-  List<Items>? _items;
-  Books copyWith({
-    String? kind,
-    int? totalItems,
-    List<Items>? items,
-  }) =>
-      Books(
-        kind: kind ?? _kind,
-        totalItems: totalItems ?? _totalItems,
-        items: items ?? _items,
-      );
-  String? get kind => _kind;
-  int? get totalItems => _totalItems;
-  List<Items>? get items => _items;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['kind'] = _kind;
-    map['totalItems'] = _totalItems;
-    if (_items != null) {
-      map['items'] = _items?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
-}
-
-Items itemsFromJson(String str) => Items.fromJson(json.decode(str));
-String itemsToJson(Items data) => json.encode(data.toJson());
-
-class Items {
-  Items({
+class DetailModel {
+  DetailModel({
     String? kind,
     String? id,
     String? etag,
@@ -64,7 +13,6 @@ class Items {
     VolumeInfo? volumeInfo,
     SaleInfo? saleInfo,
     AccessInfo? accessInfo,
-    SearchInfo? searchInfo,
   }) {
     _kind = kind;
     _id = id;
@@ -73,10 +21,9 @@ class Items {
     _volumeInfo = volumeInfo;
     _saleInfo = saleInfo;
     _accessInfo = accessInfo;
-    _searchInfo = searchInfo;
   }
 
-  Items.fromJson(dynamic json) {
+  DetailModel.fromJson(dynamic json) {
     _kind = json['kind'];
     _id = json['id'];
     _etag = json['etag'];
@@ -89,9 +36,6 @@ class Items {
     _accessInfo = json['accessInfo'] != null
         ? AccessInfo.fromJson(json['accessInfo'])
         : null;
-    _searchInfo = json['searchInfo'] != null
-        ? SearchInfo.fromJson(json['searchInfo'])
-        : null;
   }
   String? _kind;
   String? _id;
@@ -100,8 +44,7 @@ class Items {
   VolumeInfo? _volumeInfo;
   SaleInfo? _saleInfo;
   AccessInfo? _accessInfo;
-  SearchInfo? _searchInfo;
-  Items copyWith({
+  DetailModel copyWith({
     String? kind,
     String? id,
     String? etag,
@@ -109,9 +52,8 @@ class Items {
     VolumeInfo? volumeInfo,
     SaleInfo? saleInfo,
     AccessInfo? accessInfo,
-    SearchInfo? searchInfo,
   }) =>
-      Items(
+      DetailModel(
         kind: kind ?? _kind,
         id: id ?? _id,
         etag: etag ?? _etag,
@@ -119,7 +61,6 @@ class Items {
         volumeInfo: volumeInfo ?? _volumeInfo,
         saleInfo: saleInfo ?? _saleInfo,
         accessInfo: accessInfo ?? _accessInfo,
-        searchInfo: searchInfo ?? _searchInfo,
       );
   String? get kind => _kind;
   String? get id => _id;
@@ -128,7 +69,6 @@ class Items {
   VolumeInfo? get volumeInfo => _volumeInfo;
   SaleInfo? get saleInfo => _saleInfo;
   AccessInfo? get accessInfo => _accessInfo;
-  SearchInfo? get searchInfo => _searchInfo;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -145,39 +85,6 @@ class Items {
     if (_accessInfo != null) {
       map['accessInfo'] = _accessInfo?.toJson();
     }
-    if (_searchInfo != null) {
-      map['searchInfo'] = _searchInfo?.toJson();
-    }
-    return map;
-  }
-}
-
-SearchInfo searchInfoFromJson(String str) =>
-    SearchInfo.fromJson(json.decode(str));
-String searchInfoToJson(SearchInfo data) => json.encode(data.toJson());
-
-class SearchInfo {
-  SearchInfo({
-    String? textSnippet,
-  }) {
-    _textSnippet = textSnippet;
-  }
-
-  SearchInfo.fromJson(dynamic json) {
-    _textSnippet = json['textSnippet'];
-  }
-  String? _textSnippet;
-  SearchInfo copyWith({
-    String? textSnippet,
-  }) =>
-      SearchInfo(
-        textSnippet: textSnippet ?? _textSnippet,
-      );
-  String? get textSnippet => _textSnippet;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['textSnippet'] = _textSnippet;
     return map;
   }
 }
@@ -357,6 +264,10 @@ class Epub {
   }
 }
 
+/// country : "IN"
+/// saleability : "NOT_FOR_SALE"
+/// isEbook : false
+
 SaleInfo saleInfoFromJson(String str) => SaleInfo.fromJson(json.decode(str));
 String saleInfoToJson(SaleInfo data) => json.encode(data.toJson());
 
@@ -417,6 +328,8 @@ class VolumeInfo {
     List<IndustryIdentifiers>? industryIdentifiers,
     ReadingModes? readingModes,
     int? pageCount,
+    int? printedPageCount,
+    Dimensions? dimensions,
     String? printType,
     List<String>? categories,
     String? maturityRating,
@@ -438,6 +351,8 @@ class VolumeInfo {
     _industryIdentifiers = industryIdentifiers;
     _readingModes = readingModes;
     _pageCount = pageCount;
+    _printedPageCount = printedPageCount;
+    _dimensions = dimensions;
     _printType = printType;
     _categories = categories;
     _maturityRating = maturityRating;
@@ -468,6 +383,10 @@ class VolumeInfo {
         ? ReadingModes.fromJson(json['readingModes'])
         : null;
     _pageCount = json['pageCount'];
+    _printedPageCount = json['printedPageCount'];
+    _dimensions = json['dimensions'] != null
+        ? Dimensions.fromJson(json['dimensions'])
+        : null;
     _printType = json['printType'];
     _categories =
         json['categories'] != null ? json['categories'].cast<String>() : [];
@@ -494,6 +413,8 @@ class VolumeInfo {
   List<IndustryIdentifiers>? _industryIdentifiers;
   ReadingModes? _readingModes;
   int? _pageCount;
+  int? _printedPageCount;
+  Dimensions? _dimensions;
   String? _printType;
   List<String>? _categories;
   String? _maturityRating;
@@ -515,6 +436,8 @@ class VolumeInfo {
     List<IndustryIdentifiers>? industryIdentifiers,
     ReadingModes? readingModes,
     int? pageCount,
+    int? printedPageCount,
+    Dimensions? dimensions,
     String? printType,
     List<String>? categories,
     String? maturityRating,
@@ -537,6 +460,8 @@ class VolumeInfo {
         industryIdentifiers: industryIdentifiers ?? _industryIdentifiers,
         readingModes: readingModes ?? _readingModes,
         pageCount: pageCount ?? _pageCount,
+        printedPageCount: printedPageCount ?? _printedPageCount,
+        dimensions: dimensions ?? _dimensions,
         printType: printType ?? _printType,
         categories: categories ?? _categories,
         maturityRating: maturityRating ?? _maturityRating,
@@ -558,6 +483,8 @@ class VolumeInfo {
   List<IndustryIdentifiers>? get industryIdentifiers => _industryIdentifiers;
   ReadingModes? get readingModes => _readingModes;
   int? get pageCount => _pageCount;
+  int? get printedPageCount => _printedPageCount;
+  Dimensions? get dimensions => _dimensions;
   String? get printType => _printType;
   List<String>? get categories => _categories;
   String? get maturityRating => _maturityRating;
@@ -586,6 +513,10 @@ class VolumeInfo {
       map['readingModes'] = _readingModes?.toJson();
     }
     map['pageCount'] = _pageCount;
+    map['printedPageCount'] = _printedPageCount;
+    if (_dimensions != null) {
+      map['dimensions'] = _dimensions?.toJson();
+    }
     map['printType'] = _printType;
     map['categories'] = _categories;
     map['maturityRating'] = _maturityRating;
@@ -613,35 +544,62 @@ class ImageLinks {
   ImageLinks({
     String? smallThumbnail,
     String? thumbnail,
+    String? small,
+    String? medium,
+    String? large,
   }) {
     _smallThumbnail = smallThumbnail;
     _thumbnail = thumbnail;
+    _small = small;
+    _medium = medium;
+    _large = large;
   }
 
   ImageLinks.fromJson(dynamic json) {
     _smallThumbnail = json['smallThumbnail'];
     _thumbnail = json['thumbnail'];
+    _small = json['small'];
+    _medium = json['medium'];
+    _large = json['large'];
   }
   String? _smallThumbnail;
   String? _thumbnail;
+  String? _small;
+  String? _medium;
+  String? _large;
   ImageLinks copyWith({
     String? smallThumbnail,
     String? thumbnail,
+    String? small,
+    String? medium,
+    String? large,
   }) =>
       ImageLinks(
         smallThumbnail: smallThumbnail ?? _smallThumbnail,
         thumbnail: thumbnail ?? _thumbnail,
+        small: small ?? _small,
+        medium: medium ?? _medium,
+        large: large ?? _large,
       );
   String? get smallThumbnail => _smallThumbnail;
   String? get thumbnail => _thumbnail;
+  String? get small => _small;
+  String? get medium => _medium;
+  String? get large => _large;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['smallThumbnail'] = _smallThumbnail;
     map['thumbnail'] = _thumbnail;
+    map['small'] = _small;
+    map['medium'] = _medium;
+    map['large'] = _large;
     return map;
   }
 }
+
+/// containsEpubBubbles : false
+/// containsImageBubbles : false
 
 PanelizationSummary panelizationSummaryFromJson(String str) =>
     PanelizationSummary.fromJson(json.decode(str));
@@ -682,6 +640,55 @@ class PanelizationSummary {
   }
 }
 
+Dimensions dimensionsFromJson(String str) =>
+    Dimensions.fromJson(json.decode(str));
+String dimensionsToJson(Dimensions data) => json.encode(data.toJson());
+
+class Dimensions {
+  Dimensions({
+    String? height,
+    String? width,
+    String? thickness,
+  }) {
+    _height = height;
+    _width = width;
+    _thickness = thickness;
+  }
+
+  Dimensions.fromJson(dynamic json) {
+    _height = json['height'];
+    _width = json['width'];
+    _thickness = json['thickness'];
+  }
+  String? _height;
+  String? _width;
+  String? _thickness;
+  Dimensions copyWith({
+    String? height,
+    String? width,
+    String? thickness,
+  }) =>
+      Dimensions(
+        height: height ?? _height,
+        width: width ?? _width,
+        thickness: thickness ?? _thickness,
+      );
+  String? get height => _height;
+  String? get width => _width;
+  String? get thickness => _thickness;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['height'] = _height;
+    map['width'] = _width;
+    map['thickness'] = _thickness;
+    return map;
+  }
+}
+
+/// text : false
+/// image : true
+
 ReadingModes readingModesFromJson(String str) =>
     ReadingModes.fromJson(json.decode(str));
 String readingModesToJson(ReadingModes data) => json.encode(data.toJson());
@@ -719,6 +726,9 @@ class ReadingModes {
     return map;
   }
 }
+
+/// type : "ISBN_10"
+/// identifier : "3642049567"
 
 IndustryIdentifiers industryIdentifiersFromJson(String str) =>
     IndustryIdentifiers.fromJson(json.decode(str));

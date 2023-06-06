@@ -1,6 +1,6 @@
 import 'package:e_book/screens/profileScreen.dart';
 import 'package:e_book/screens/sign_in_page.dart';
-import 'package:e_book/screens/sign_up_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,16 +25,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     items = [
-      {
-        'icon': Icons.favorite_border,
-        'title': 'Favorites',
-        'function': () {},
-      },
-      {
-        'icon': Icons.download,
-        'title': 'Downloads',
-        'function': () {},
-      },
       {
         'icon': Icons.person,
         'title': 'Profile',
@@ -78,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               thickness: 1,
             );
           }),
-          itemCount: 4),
+          itemCount: 2),
     );
   }
 }

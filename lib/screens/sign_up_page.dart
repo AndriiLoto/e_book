@@ -83,9 +83,24 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _emailTextInputController.addListener(() {
+      setState(() {});
+    });
+    _passwordTextInputController.addListener(() {
+      setState(() {});
+    });
+    _passwordTextRepeatInputController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[900],
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
@@ -228,7 +243,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) =>
-                                value != null && value.length < 5
+                                value != null && value.length < 6
                                     ? 'Password must contain 6 characters'
                                     : null,
                           ),
@@ -244,7 +259,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: ElevatedButton(
-                            onPressed: _signUp,
+                            onPressed:
+                                (_emailTextInputController.text.isNotEmpty &&
+                                        _passwordTextInputController
+                                            .text.isNotEmpty &&
+                                        _passwordTextRepeatInputController
+                                            .text.isNotEmpty)
+                                    ? _signUp
+                                    : null,
                             style: ElevatedButton.styleFrom(
                                 shadowColor: Colors.grey[700],
                                 elevation: 7.5,

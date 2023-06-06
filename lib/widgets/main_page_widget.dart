@@ -1,5 +1,7 @@
-import 'package:e_book/screens/explore_screen_widget.dart';
+import 'package:e_book/screens/categories.dart';
+
 import 'package:e_book/screens/home_page.dart';
+
 import 'package:e_book/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +30,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: IndexedStack(index: _selectedPageIndex, children: [
         HomePage(),
-        ExplorePageWidget(),
+        Categories(),
         SettingsScreen(),
       ]),
       bottomNavigationBar: BottomNavigationBar(

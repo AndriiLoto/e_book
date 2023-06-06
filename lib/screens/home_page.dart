@@ -1,8 +1,17 @@
-import 'package:e_book/widgets/category_buttons.dart';
-import 'package:e_book/widgets/my_books.dart';
-import 'package:e_book/widgets/recently_added.dart';
+import 'package:e_book/screens/search_screen.dart';
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+
+import '../widgets/category_books/adventure.dart';
+import '../widgets/category_books/anime_books.dart';
+import '../widgets/category_books/horror.dart';
+import '../widgets/category_books/novel.dart';
+import '../widgets/category_books/popular.dart';
+import '../widgets/headline.dart';
+import 'book_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +22,8 @@ class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -33,133 +44,139 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.all(18.5),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: (user == null)
-                    ? Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'Sign in and see your favorites books',
-                            style: TextStyle(
-                                fontFamily: 'e-Ukraine',
-                                color: Colors.white,
-                                fontSize: 19),
-                          ),
-                        ],
-                      )
-                    : Row(
-                        children: const [
-                          MyBooks(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          MyBooks(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          MyBooks(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          MyBooks(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  showSearch(
+                      context: context, delegate: CustomSearchDelegate());
+                },
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  height: 50,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(width: 1, color: Colors.grey),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Search for Books",
+                        style: TextStyle(color: Colors.grey),
                       ),
+                      Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 11.0),
-              child: Text(
-                'Categories',
-                style: TextStyle(fontFamily: 'e-Ukraine', color: Colors.white),
-              ),
+            const SizedBox(
+              height: 20,
             ),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800],
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      child: CategoryButtons(
-                        categoryName: 'Short Stories',
-                      ),
-                    ),
+                  const Text(
+                    'Most Popular',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'e-ukraine',
+                        fontSize: 20),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800],
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookList(name: "Fiction"),
                         ),
-                      ),
-                      child: CategoryButtons(
-                        categoryName: 'Science Fiction',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800],
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      child: CategoryButtons(
-                        categoryName: 'Action & Adventure',
-                      ),
+                      );
+                    },
+                    child: const Text(
+                      "See All",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'e-ukraine',
+                          fontSize: 15),
                     ),
                   )
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 11.0),
-              child: Text(
-                'Recently Added',
-                style: TextStyle(fontFamily: 'e-Ukraine', color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Container(
+                height: height / 5.3,
+                //height: constraints.maxHeight * 0.38,
+                margin: const EdgeInsets.only(left: 16),
+                child: const PopularBooks(),
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(
+              color: Colors.white,
+            ),
+            Headline(
+              category: "Anime",
+              showAll: "Anime",
+            ),
+            SizedBox(
+              height: height / 3.4,
+              child: const AnimeBooks(),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(
+              color: Colors.white,
+            ),
+            Headline(
+              category: "Action & Adventure",
+              showAll: "Action & Adventure",
+            ),
+            SizedBox(
+              //color: Colors.yellow,
+              height: height / 3.4,
+              child: const AdevntureBooks(),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(
+              color: Colors.white,
+            ),
+            Headline(
+              category: "Novel",
+              showAll: "Novel",
+            ),
+            SizedBox(
+              //color: Colors.yellow,
+              height: height / 3.4,
+              child: const NovelBooks(),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15.0,
-              ),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: 5,
-                prototypeItem: RecentlyAdded(),
-                itemBuilder: (context, index) {
-                  return RecentlyAdded();
-                },
-              ),
+            const Divider(
+              color: Colors.white,
+            ),
+            Headline(
+              category: "Horror",
+              showAll: "Horror",
+            ),
+            SizedBox(
+              //color: Colors.yellow,
+              height: height / 3.4,
+              child: const HorrorBooks(),
             ),
           ],
         ),
